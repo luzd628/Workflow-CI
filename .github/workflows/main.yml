@@ -54,7 +54,7 @@ jobs:
       
       - name: Tag Docker Image
         run: |
-          docker tag cc ${{ secrets.DOCKER_HUB_USERNAME }}/workflow:latest
+          docker tag workflow ${{ secrets.DOCKER_HUB_USERNAME }}/workflow:latest
       
       - name: Push Docker Image
         run: |
