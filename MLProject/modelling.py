@@ -5,7 +5,7 @@ import mlflow.sklearn
 import pandas as pd
 import numpy as np 
 import warnings
-import pickle
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.svm import SVC
@@ -65,9 +65,8 @@ if __name__ == "__main__":
         )
     
     # simpan model
-    os.makedirs("saved_model",exist_ok=True)
-    model_path = os.path.join("saved_model","svm_model.pkl")
-    with open(model_path, "wb") as f:
-        pickle.dump(model, f)
-    print(f"Model telah tersimpan di:{model_path}")
+    path = "./saved_models/svm_model.pkl"
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    joblib.dump(model, path) 
+    print(f"Model telah tersimpan di:{path}")
         
