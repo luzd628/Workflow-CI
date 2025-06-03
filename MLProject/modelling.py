@@ -34,8 +34,6 @@ if __name__ == "__main__":
 
     with mlflow.start_run():
 
-        mlflow.autolog()
-
         # Train Model
         model = SVC(C=c, kernel=kernel)
         model.fit(X_train, y_train)
