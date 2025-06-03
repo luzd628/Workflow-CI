@@ -8,7 +8,7 @@ on:
     branches:
       - main
 env:
-  CSV_URL: "MLproject/loan_data_preprocessing.csv"
+  CSV_URL: "MLProject/loan_data_preprocessing.csv"
   TARGET_VAR: "Loan Approval"
 
 jobs:
