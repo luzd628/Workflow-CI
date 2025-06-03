@@ -1,0 +1,11 @@
+name: Workflow-CI
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      C: {type: float, default: 1.0}
+      kernel: {type: string, default: "linear"}
+      dataset : {type: string, default: "loan_data_preprocessing.csv"}
+    command: "python modelling.py {C} {kernel} {dataset}"
