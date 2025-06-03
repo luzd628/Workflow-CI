@@ -35,6 +35,12 @@ jobs:
       - name: Run mlflow project 
         run: |
           mlflow run MLProject --env-manager=local
+
+      - name: Upload Model
+        uses: actions/Upload-artifact@v4
+        with: 
+          name: saved-model
+          path: saved_model/svm_model.pkl
       
       - name: Get latest MLflow run_id
         run: |

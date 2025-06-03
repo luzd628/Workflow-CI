@@ -7,6 +7,7 @@ import numpy as np
 import warnings
 import pickle
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.svm import SVC
 
 if __name__ == "__main__":
@@ -38,16 +39,31 @@ if __name__ == "__main__":
         model = SVC(C=c, kernel=kernel)
         model.fit(X_train, y_train)
 
+        # Predict
+        y_pred = model.predict(X_test)
+        
+        # matrik evaluasi
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average="weighted")
+        recall = recall_score(y_test, y_pred, average="weighted")
+        f1 = f1_score(y_test, y_pred, average="weighted")
+
+        # Log Parameter
+        mlflow.log_param("C", c)
+        mlflow.log_param("Kernel",kernel)
+
+        # Evaluate Model
+        mlflow.log_metric("accuracy", accuracy)
+        mlflow.log_metric("precision", precision)
+        mlflow.log_metric("recall", recall)
+        mlflow.log_metric("f1 score", f1)
+
         mlflow.sklearn.log_model(
             sk_model = model,
             artifact_path="model",
             input_example=input_example
         )
-
-        # Log metrics
-        accuracy = model.score(X_test, y_test)
-        mlflow.log_metric("accuracy", accuracy)
-
+    
     # simpan model
     os.makedirs("saved_model",exist_ok=True)
     model_path = os.path.join("saved_model","svm_model.pkl")
