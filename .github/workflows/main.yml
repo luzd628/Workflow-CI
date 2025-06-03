@@ -42,6 +42,14 @@ jobs:
           name: saved-model
           path: MLProject/saved_models/svm_model.pkl
       
+      - name: Push model into repository
+        run: | 
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@users.noreply.github.com'
+          git add MLProject/saved_models/svm_model.pkl
+          git commit -m "Add trained model"
+          git push origin main
+      
       - name: Get latest MLflow run_id
         run: |
           RUN_ID=$(ls -td mlruns/0/*/ | head -n 1 | cut -d'/' -f3)
