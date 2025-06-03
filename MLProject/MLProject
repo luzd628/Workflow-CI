@@ -9,3 +9,4 @@ entry_points:
       kernel: {type: string, default: "linear"}
       dataset : {type: string, default: "loan_data_preprocessing.csv"}
     command: "python modelling.py {C} {kernel} {dataset}"
+ 
